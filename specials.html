@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Specials - M9 Cafe & Grill Mehar</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Site styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/tailwind-config.js"></script>
+</head>
+<body class="bg-brand-dark text-gray-200 antialiased selection:bg-brand-gold selection:text-black">
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed top-20 right-5 z-50 transform translate-x-full transition-transform duration-300 ease-in-out bg-brand-gold text-black font-semibold px-5 py-3 rounded-xl shadow-2xl flex items-center space-x-3 border border-amber-300 pointer-events-none">
+        <i class="fa-solid fa-circle-check text-xl"></i>
+        <span id="toast-msg">Item added to cart!</span>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 bg-black/80 backdrop-blur-md border-b border-brand-border/60 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center space-x-3 group">
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-brand-gold to-brand-accent flex items-center justify-center text-black font-bold text-xl shadow-lg group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-fire"></i>
+                    </div>
+                    <div>
+                        <span class="font-cinzel text-xl sm:text-2xl font-bold tracking-wider text-white block leading-none">M9 CAFE</span>
+                        <span class="text-[10px] tracking-[0.25em] text-brand-amber font-semibold uppercase block mt-1">&amp; Grill Mehar</span>
+                    </div>
+                </a>
+
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <a href="index.html" class="text-gray-300 hover:text-brand-amber transition-colors transition-colors">Home</a>
+                    <a href="menu.html" class="text-gray-300 hover:text-brand-amber transition-colors transition-colors">Menu</a>
+                    <a href="specials.html" class="text-brand-amber font-semibold transition-colors">Specials</a>
+                    <a href="about.html" class="text-gray-300 hover:text-brand-amber transition-colors transition-colors">About Us</a>
+                    <a href="gallery.html" class="text-gray-300 hover:text-brand-amber transition-colors transition-colors">Gallery</a>
+                    <a href="reviews.html" class="text-gray-300 hover:text-brand-amber transition-colors transition-colors">Reviews</a>
+                    <a href="contact.html" class="text-gray-300 hover:text-brand-amber transition-colors transition-colors">Contact</a>
+                </nav>
+
+                <div class="flex items-center space-x-4">
+                    <button id="open-cart-btn" onclick="toggleCart()" class="relative p-2.5 rounded-xl bg-brand-card border border-brand-border hover:border-brand-gold text-white transition-all">
+                        <i class="fa-solid fa-basket-shopping text-lg text-brand-amber"></i>
+                        <span id="cart-badge" class="absolute -top-1.5 -right-1.5 bg-brand-accent text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold shadow-md">0</span>
+                    </button>
+
+                    <button onclick="openReserveModal()" class="hidden lg:inline-flex items-center space-x-2 border border-brand-gold/50 text-brand-amber hover:bg-brand-gold hover:text-black font-semibold text-xs uppercase tracking-wider px-4 py-2.5 rounded-xl transition-all duration-300">
+                        <i class="fa-regular fa-calendar-check"></i>
+                        <span>Reserve Table</span>
+                    </button>
+
+                    <a href="tel:03075566635" class="hidden sm:inline-flex items-center space-x-2 bg-gradient-to-r from-brand-gold to-brand-accent hover:from-amber-600 hover:to-orange-600 text-black font-bold text-sm px-4 py-2.5 rounded-xl shadow-lg transition-all transform hover:scale-105">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>0307 5566635</span>
+                    </a>
+
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-xl text-gray-300 hover:text-white bg-brand-card border border-brand-border">
+                        <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-card/95 border-b border-brand-border px-4 pt-3 pb-6 space-y-3 backdrop-blur-xl">
+            <a href="index.html" onclick="toggleMobileMenu()" class="block text-gray-300 font-medium hover:text-brand-amber py-2 border-b border-white/5">Home</a>
+            <a href="menu.html" onclick="toggleMobileMenu()" class="block text-gray-300 font-medium hover:text-brand-amber py-2 border-b border-white/5">Menu</a>
+            <a href="specials.html" onclick="toggleMobileMenu()" class="block text-brand-amber font-medium hover:text-brand-amber py-2 border-b border-white/5">Specials</a>
+            <a href="about.html" onclick="toggleMobileMenu()" class="block text-gray-300 font-medium hover:text-brand-amber py-2 border-b border-white/5">About Us</a>
+            <a href="gallery.html" onclick="toggleMobileMenu()" class="block text-gray-300 font-medium hover:text-brand-amber py-2 border-b border-white/5">Gallery</a>
+            <a href="reviews.html" onclick="toggleMobileMenu()" class="block text-gray-300 font-medium hover:text-brand-amber py-2 border-b border-white/5">Reviews</a>
+            <a href="contact.html" onclick="toggleMobileMenu()" class="block text-gray-300 font-medium hover:text-brand-amber py-2 border-b border-white/5">Contact</a>
+            <div class="pt-2 flex flex-col gap-2">
+                <button onclick="openReserveModal(); toggleMobileMenu();" class="w-full text-center border border-brand-gold text-brand-amber py-2.5 rounded-xl font-medium">Reserve Table</button>
+                <a href="tel:03075566635" class="w-full text-center bg-brand-gold text-black font-bold py-2.5 rounded-xl flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-phone"></i> Call 0307 5566635
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-brand-amber font-semibold text-xs tracking-widest uppercase">Signature Delicacies</span>
+                <h2 class="font-cinzel text-3xl sm:text-4xl font-bold text-white mt-2">Chef's Today Specials</h2>
+                <p class="text-gray-400 text-sm mt-2">Handpicked customer favorites grilled to perfection and served with rich artisanal flavors.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <div class="bg-brand-card border border-brand-border rounded-2xl overflow-hidden card-hover group flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-52 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=700&q=80" alt="Special Grill" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute top-3 right-3 bg-black/80 backdrop-blur-md text-brand-amber font-bold text-sm px-3 py-1 rounded-full border border-brand-gold/30">
+                                Rs. 1,250
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-cinzel text-xl font-bold text-white group-hover:text-brand-amber transition-colors">Special BBQ Charcoal Platter</h3>
+                            <p class="text-gray-400 text-xs mt-2 leading-relaxed">Juicy grilled chicken tikka, tender kebabs, garlic naan, mint chutney, and sautéed veggies.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <button onclick="addToCart(1)" class="w-full bg-brand-gold/10 hover:bg-brand-gold text-brand-amber hover:text-black border border-brand-gold/30 font-semibold py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 text-sm">
+                            <i class="fa-solid fa-cart-plus"></i> Add To Order
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-brand-card border border-brand-border rounded-2xl overflow-hidden card-hover group flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-52 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=700&q=80" alt="Special Burger" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute top-3 right-3 bg-black/80 backdrop-blur-md text-brand-amber font-bold text-sm px-3 py-1 rounded-full border border-brand-gold/30">
+                                Rs. 650
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-cinzel text-xl font-bold text-white group-hover:text-brand-amber transition-colors">M9 Loaded Steak Burger</h3>
+                            <p class="text-gray-400 text-xs mt-2 leading-relaxed">Double grilled beef/chicken patty, melted cheddar cheese, caramelized onions &amp; secret M9 sauce.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <button onclick="addToCart(2)" class="w-full bg-brand-gold/10 hover:bg-brand-gold text-brand-amber hover:text-black border border-brand-gold/30 font-semibold py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 text-sm">
+                            <i class="fa-solid fa-cart-plus"></i> Add To Order
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-brand-card border border-brand-border rounded-2xl overflow-hidden card-hover group flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-52 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=700&q=80" alt="Special Coffee" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute top-3 right-3 bg-black/80 backdrop-blur-md text-brand-amber font-bold text-sm px-3 py-1 rounded-full border border-brand-gold/30">
+                                Rs. 380
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-cinzel text-xl font-bold text-white group-hover:text-brand-amber transition-colors">Artisanal Hazelnut Cappuccino</h3>
+                            <p class="text-gray-400 text-xs mt-2 leading-relaxed">Freshly brewed rich espresso blended with velvety steamed milk and aromatic hazelnut essence.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <button onclick="addToCart(3)" class="w-full bg-brand-gold/10 hover:bg-brand-gold text-brand-amber hover:text-black border border-brand-gold/30 font-semibold py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 text-sm">
+                            <i class="fa-solid fa-cart-plus"></i> Add To Order
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black pt-16 pb-12 border-t border-brand-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-brand-border/60">
+
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-gold to-brand-accent flex items-center justify-center text-black font-bold text-lg">
+                            <i class="fa-solid fa-fire"></i>
+                        </div>
+                        <span class="font-cinzel text-xl font-bold tracking-wider text-white">M9 CAFE</span>
+                    </div>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Elevating taste, crafting memories. Experience the art of fine fast food &amp; grill dining in Mehar like never before.
+                    </p>
+                    <div class="flex space-x-3 text-brand-amber">
+                        <a href="#" class="w-8 h-8 rounded-lg bg-brand-card border border-brand-border flex items-center justify-center hover:bg-brand-gold hover:text-black transition-colors"><i class="fa-brands fa-facebook-f text-xs"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-lg bg-brand-card border border-brand-border flex items-center justify-center hover:bg-brand-gold hover:text-black transition-colors"><i class="fa-brands fa-instagram text-xs"></i></a>
+                        <a href="https://wa.me/923075566635" target="_blank" class="w-8 h-8 rounded-lg bg-brand-card border border-brand-border flex items-center justify-center hover:bg-brand-gold hover:text-black transition-colors"><i class="fa-brands fa-whatsapp text-xs"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-cinzel text-white text-sm font-bold tracking-wider mb-4 uppercase">Quick Links</h4>
+                    <ul class="space-y-2 text-xs text-gray-400">
+                        <li><a href="index.html" class="hover:text-brand-amber transition-colors">Home</a></li>
+                        <li><a href="menu.html" class="hover:text-brand-amber transition-colors">Our Menu</a></li>
+                        <li><a href="specials.html" class="hover:text-brand-amber transition-colors">Chef Specials</a></li>
+                        <li><a href="about.html" class="hover:text-brand-amber transition-colors">About Story</a></li>
+                        <li><a href="reviews.html" class="hover:text-brand-amber transition-colors">Reviews &amp; Ratings</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-cinzel text-white text-sm font-bold tracking-wider mb-4 uppercase">Contact Us</h4>
+                    <ul class="space-y-3 text-xs text-gray-400">
+                        <li class="flex items-start space-x-3">
+                            <i class="fa-solid fa-location-dot text-brand-amber mt-0.5"></i>
+                            <span>5RH6+GP4, Mehar, Sindh, Pakistan</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-phone text-brand-amber"></i>
+                            <a href="tel:03075566635" class="hover:text-brand-amber text-white font-medium">0307 5566635</a>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-brands fa-whatsapp text-emerald-500"></i>
+                            <a href="https://wa.me/923075566635" target="_blank" class="hover:text-brand-amber text-white font-medium">WhatsApp Orders</a>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <i class="fa-regular fa-clock text-brand-amber mt-0.5"></i>
+                            <div>
+                                <p class="text-white">Monday: 24 Hours Open</p>
+                                <p class="text-gray-400">Tue - Sun: 11:59 AM - 11:59 PM</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-cinzel text-white text-sm font-bold tracking-wider mb-4 uppercase">Location Map</h4>
+                    <div class="rounded-xl overflow-hidden border border-brand-border h-32 bg-brand-card relative group">
+                        <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=500&q=80" alt="Map Preview" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform">
+                        <a href="https://maps.app.goo.gl/Xzoneo1rNpqPvTobA" target="_blank" class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 hover:bg-black/20 transition-colors p-2 text-center">
+                            <i class="fa-solid fa-map-location-dot text-brand-gold text-2xl mb-1"></i>
+                            <span class="text-xs font-bold text-white">Open in Google Maps</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
+                <p>&copy; 2026 M9 Cafe &amp; Grill Mehar. All Rights Reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-gray-400">Privacy Policy</a>
+                    <a href="#" class="hover:text-gray-400">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Slide-over Shopping Cart Drawer -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden pointer-events-none">
+        <div id="cart-backdrop" onclick="toggleCart()" class="absolute inset-0 bg-black/70 backdrop-blur-sm opacity-0 transition-opacity duration-300 pointer-events-none"></div>
+
+        <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+            <div id="cart-panel" class="w-screen max-w-md bg-brand-card border-l border-brand-border transform translate-x-full transition-transform duration-300 ease-in-out pointer-events-auto flex flex-col justify-between">
+
+                <div class="p-6 border-b border-brand-border flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-basket-shopping text-brand-gold text-xl"></i>
+                        <h3 class="font-cinzel text-lg font-bold text-white">Your Food Basket</h3>
+                    </div>
+                    <button onclick="toggleCart()" class="text-gray-400 hover:text-white p-2">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <div class="p-6 overflow-y-auto flex-1 space-y-4" id="cart-items-container"></div>
+
+                <div class="p-6 border-t border-brand-border bg-black/40 space-y-4">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-400">Subtotal:</span>
+                        <span class="text-white font-bold" id="cart-subtotal">Rs. 0</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-400">Delivery in Mehar:</span>
+                        <span class="text-emerald-400 font-medium">Standard / Quick</span>
+                    </div>
+                    <div class="flex justify-between text-base font-bold text-white border-t border-brand-border/60 pt-3">
+                        <span>Total:</span>
+                        <span class="text-brand-amber" id="cart-total">Rs. 0</span>
+                    </div>
+
+                    <button onclick="checkoutWhatsApp()" class="w-full bg-gradient-to-r from-emerald-600 to-green-500 hover:from-emerald-500 hover:to-green-400 text-white font-bold py-3.5 rounded-xl transition-all flex items-center justify-center space-x-2 shadow-lg">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>Order via WhatsApp (0307 5566635)</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table Reservation Modal -->
+    <div id="reserve-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-brand-card border border-brand-border w-full max-w-lg rounded-2xl p-6 sm:p-8 space-y-6 relative shadow-2xl">
+
+            <button onclick="closeReserveModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <div>
+                <span class="text-brand-amber font-semibold text-xs uppercase tracking-widest">Book Your Spot</span>
+                <h3 class="font-cinzel text-2xl font-bold text-white mt-1">Reserve A Table</h3>
+                <p class="text-gray-400 text-xs mt-1">Enjoy a premium dining atmosphere with your family &amp; friends.</p>
+            </div>
+
+            <form onsubmit="handleReservation(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-gray-300 mb-1">Full Name</label>
+                    <input type="text" required placeholder="e.g. Ali Ahmed" class="w-full bg-black/60 border border-brand-border focus:border-brand-gold rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-300 mb-1">Phone Number</label>
+                        <input type="tel" required placeholder="03xx xxxxxxx" class="w-full bg-black/60 border border-brand-border focus:border-brand-gold rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-300 mb-1">No. of Guests</label>
+                        <select class="w-full bg-black/60 border border-brand-border focus:border-brand-gold rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+                            <option>2 Persons</option>
+                            <option>4 Persons</option>
+                            <option>6 Persons</option>
+                            <option>8+ Family Table</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-300 mb-1">Date</label>
+                        <input type="date" required class="w-full bg-black/60 border border-brand-border focus:border-brand-gold rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-300 mb-1">Time</label>
+                        <input type="time" required class="w-full bg-black/60 border border-brand-border focus:border-brand-gold rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-gradient-to-r from-brand-gold to-brand-accent hover:from-amber-600 hover:to-orange-600 text-black font-bold py-3 rounded-xl transition-all shadow-lg text-sm">
+                    Confirm Reservation Request
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/menu-data.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/menu-render.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+</html>
